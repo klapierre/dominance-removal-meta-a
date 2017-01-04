@@ -56,7 +56,7 @@ competition <- subset(removals, response_recategorized=='competition')
 ###directional responses
 
 #mixed effects models
-summary(lrrModel <- lme(lrr ~ pulse.press + response_recategorized + study_months + study_system_detail, random=~1|NUM, data=removals))
+summary(lrrModel <- lme(lrr ~ pulse.press + study_months + study_system_detail, random=~1|NUM, data=removals))
 
 ###ttests - lnRR
 t.test(ecosystem$lrr, alternative='t', conf.level=0.983334) #bonferroni corrected conf.level for 3 tests
@@ -70,7 +70,7 @@ t.test(competition$lrr, alternative='t', conf.level=0.983334)
 ###abs value of lrr
 
 #mixed effects models
-summary(lrrModel <- lme(abs_lrr ~ pulse.press + response_recategorized + study_months + study_system_detail, random=~1|NUM, data=removals))
+summary(lrrModel <- lme(abs_lrr ~ pulse.press + study_months + study_system_detail, random=~1|NUM, data=removals))
 
 ###ttests - abs lnRR
 t.test(ecosystem$abs_lrr, alternative='t', conf.level=0.983334)
