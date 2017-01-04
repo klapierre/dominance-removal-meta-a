@@ -84,7 +84,8 @@ t.test(competition$abs_lrr, alternative='t', conf.level=0.983334)
 ###figures
 #abs lnRR
 absLnRRPlot <- ggplot(removals, aes(x=response_recategorized, y=abs_lrr)) +
-  geom_boxplot() +
+  geom_violin() +
+  geom_boxplot(width=0.05) +
   xlab('') +
   ylab('|lnRR|') +
   scale_y_continuous(breaks=seq(-4,8,2)) +
@@ -96,7 +97,8 @@ absLnRRPlot <- ggplot(removals, aes(x=response_recategorized, y=abs_lrr)) +
 
 #lnRR
 lnRRPlot <- ggplot(removals, aes(x=response_recategorized, y=lrr)) +
-  geom_boxplot() +
+  geom_violin() +
+  geom_boxplot(width=0.05) +
   xlab('') +
   ylab('lnRR') +
   scale_y_continuous(breaks=seq(-4,8,2)) +
