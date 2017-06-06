@@ -88,8 +88,8 @@ absLnRRPlot <- ggplot(removals, aes(x=response_recategorized, y=abs_lrr)) +
   geom_boxplot(width=0.05) +
   xlab('') +
   ylab('|lnRR|') +
-  scale_y_continuous(breaks=seq(-4,8,2)) +
-  coord_cartesian(ylim=c(0,8), xlim=c(1,3)) +
+  # scale_y_continuous(breaks=seq(-4,8,2)) +
+  # coord_cartesian(ylim=c(0,8), xlim=c(1,3)) +
   scale_x_discrete(labels=c('', '', '')) +
   annotate('text', x=1.1, y=0.8, label='*', size=10, hjust='left') +
   annotate('text', x=3.1, y=0.8, label='*', size=10, hjust='left') +
@@ -101,8 +101,8 @@ lnRRPlot <- ggplot(removals, aes(x=response_recategorized, y=lrr)) +
   geom_boxplot(width=0.05) +
   xlab('') +
   ylab('lnRR') +
-  scale_y_continuous(breaks=seq(-4,8,2)) +
-  coord_cartesian(ylim=c(-4,8), xlim=c(1,3)) +
+  # scale_y_continuous(breaks=seq(-4,8,2)) +
+  # coord_cartesian(ylim=c(-4,8), xlim=c(1,3)) +
   scale_x_discrete(labels=c('community\n(45)', 'competition\n(12)', 'function\n(49)')) +
   annotate('text', x=0.6, y=8, label='(b)', size=10, hjust='left')
 
