@@ -11,6 +11,7 @@ setwd("C:\\Users\\Kim\\Dropbox\\Dominance ms\\Analyses\\removal_metaanalysis")
 #meghan
 setwd("~/Dropbox/Dominance ms/Analyses/removal_metaanalysis")
 
+setwd("C:\\Users\\megha\\Dropbox\\manuscripts\\Dominance ms\\Analyses\\removal_metaanalysis")
 
 theme_set(theme_bw())
 theme_update(axis.title.x=element_text(size=40, vjust=-0.35, margin=margin(t=15)), axis.text.x=element_text(size=34, color='black'),
@@ -49,12 +50,12 @@ removals <- read.csv('removal data_11032016.csv')%>%
   #calculate abs value of lrr
   mutate(abs_lrr=abs(lrr))
   
-#split into community, ecosystem, and competition responses
-ecosystem <- subset(removals, response_recategorized=='ecosystem')%>%
-  mutate(response_variable_code=ifelse(response_variable=='productivity'|response_variable=='total cover (proxy for biomass)'|response_variable=='total vascular cover (proxy for biomass)', 'productivity', 'other'))
-community <- subset(removals, response_recategorized=='community')%>%
-  mutate(response_variable_code=ifelse(response_variable=='richness', 'richness', 'other'))
-competition <- subset(removals, response_recategorized=='competition')
+# #split into community, ecosystem, and competition responses
+# ecosystem <- subset(removals, response_recategorized=='ecosystem')%>%
+#   mutate(response_variable_code=ifelse(response_variable=='productivity'|response_variable=='total cover (proxy for biomass)'|response_variable=='total vascular cover (proxy for biomass)', 'productivity', 'other'))
+# community <- subset(removals, response_recategorized=='community')%>%
+#   mutate(response_variable_code=ifelse(response_variable=='richness', 'richness', 'other'))
+# competition <- subset(removals, response_recategorized=='competition')
 
 #ecosystem type
 system<-removals%>%
@@ -70,11 +71,6 @@ type<-removals%>%
 #######################
 ###directional responses
 
-#mixed effects models
-M1<-lrrModel <- lme(lrr ~ pulse.press + study_months + study_system_detail, random=~1|NUM, data=subset(removals, response_recategorized!="competition"))
-summary(M1)
-Anova(M1)
-
 ###ttests - lnRR
 #we are not going to bonferonni correct because we are only doing 2 t-tests
 t.test(ecosystem$lrr, alternative='t') #bonferroni corrected conf.level for 2 tests
@@ -82,20 +78,39 @@ t.test(community$lrr, alternative='t')
 #t.test(competition$lrr, alternative='t', conf.level=0.983334)
 #ecosystem, competition, and community are not significantly diff from 0
 
+#GLM ecosystem
+M1e<-glm(lrr ~ pulse.press + study_months + study_system_detail, data=subset(removals, response_recategorized=="ecosystem"))
+summary(M1e)
+Anova(M1e)
 
-#no longer doing this
+
+#GLM community
+M1c<-glm(lrr ~ pulse.press + study_months + study_system_detail, data=subset(removals, response_recategorized=="community"))
+summary(M1c)
+Anova(M1c)
+
 #######################
 ###abs value of lrr
 
-#mixed effects models
-M2<-lrrModel <- lme(abs_lrr ~ pulse.press + study_months + study_system_detail, random=~1|NUM, data=subset(removals, response_recategorized!="competition"))
-Anova(M2)
-
 ###ttests - abs lnRR
-t.test(ecosystem$abs_lrr, alternative='t', conf.level=0.975)
-t.test(community$abs_lrr, alternative='t', conf.level=0.975)
+t.test(ecosystem$abs_lrr, alternative='t')
+t.test(community$abs_lrr, alternative='t')
 #t.test(competition$abs_lrr, alternative='t', conf.level=0.983334)
 #ecosystem and community are significantly diff from 0
+
+#GLM - ecosystem
+M2e<-glm(abs_lrr ~ pulse.press + study_months + study_system_detail, data=subset(removals, response_recategorized=="ecosystem"))
+summary(M2e)
+Anova(M2e)
+
+#GLM community
+M2c<-glm(abs_lrr ~ pulse.press + study_months + study_system_detail, data=subset(removals, response_recategorized=="community"))
+summary(M2c)
+Anova(M2c)
+
+
+
+
 
 
 
