@@ -51,10 +51,10 @@ removals <- read.csv('removal data_11032016.csv')%>%
   mutate(abs_lrr=abs(lrr))
   
 # #split into community, ecosystem, and competition responses
-# ecosystem <- subset(removals, response_recategorized=='ecosystem')%>%
-#   mutate(response_variable_code=ifelse(response_variable=='productivity'|response_variable=='total cover (proxy for biomass)'|response_variable=='total vascular cover (proxy for biomass)', 'productivity', 'other'))
-# community <- subset(removals, response_recategorized=='community')%>%
-#   mutate(response_variable_code=ifelse(response_variable=='richness', 'richness', 'other'))
+ecosystem <- subset(removals, response_recategorized=='ecosystem')%>%
+  mutate(response_variable_code=ifelse(response_variable=='productivity'|response_variable=='total cover (proxy for biomass)'|response_variable=='total vascular cover (proxy for biomass)', 'productivity', 'other'))
+community <- subset(removals, response_recategorized=='community')%>%
+  mutate(response_variable_code=ifelse(response_variable=='richness', 'richness', 'other'))
 # competition <- subset(removals, response_recategorized=='competition')
 
 #ecosystem type
