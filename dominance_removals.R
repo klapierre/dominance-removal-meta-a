@@ -14,32 +14,32 @@ setwd("~/Dropbox/Dominance ms/Analyses/removal_metaanalysis")
 setwd("C:\\Users\\megha\\Dropbox\\manuscripts\\Dominance ms\\Analyses\\removal_metaanalysis")
 
 theme_set(theme_bw())
-theme_update(axis.title.x=element_text(size=40, vjust=-0.35, margin=margin(t=15)), axis.text.x=element_text(size=34, color='black'),
-             axis.title.y=element_text(size=40, angle=90, vjust=0.5, margin=margin(r=15)), axis.text.y=element_text(size=34, color='black'),
-             plot.title = element_text(size=24, vjust=2),
-             panel.grid.major=element_blank(), panel.grid.minor=element_blank(),
-             legend.title=element_blank(), legend.text=element_text(size=20))
+# theme_update(axis.title.x=element_text(size=40, vjust=-0.35, margin=margin(t=15)), axis.text.x=element_text(size=34, color='black'),
+#              axis.title.y=element_text(size=40, angle=90, vjust=0.5, margin=margin(r=15)), axis.text.y=element_text(size=34, color='black'),
+#              plot.title = element_text(size=24, vjust=2),
+#              panel.grid.major=element_blank(), panel.grid.minor=element_blank(),
+#              legend.title=element_blank(), legend.text=element_text(size=20))
 
 
 ###bar graph summary statistics function
 #barGraphStats(data=, variable="", byFactorNames=c(""))
-
-barGraphStats <- function(data, variable, byFactorNames) {
-  count <- length(byFactorNames)
-  N <- aggregate(data[[variable]], data[byFactorNames], FUN=length)
-  names(N)[1:count] <- byFactorNames
-  names(N) <- sub("^x$", "N", names(N))
-  mean <- aggregate(data[[variable]], data[byFactorNames], FUN=mean)
-  names(mean)[1:count] <- byFactorNames
-  names(mean) <- sub("^x$", "mean", names(mean))
-  sd <- aggregate(data[[variable]], data[byFactorNames], FUN=sd)
-  names(sd)[1:count] <- byFactorNames
-  names(sd) <- sub("^x$", "sd", names(sd))
-  preSummaryStats <- merge(N, mean, by=byFactorNames)
-  finalSummaryStats <- merge(preSummaryStats, sd, by=byFactorNames)
-  finalSummaryStats$se <- finalSummaryStats$sd / sqrt(finalSummaryStats$N)
-  return(finalSummaryStats)
-}  
+# 
+# barGraphStats <- function(data, variable, byFactorNames) {
+#   count <- length(byFactorNames)
+#   N <- aggregate(data[[variable]], data[byFactorNames], FUN=length)
+#   names(N)[1:count] <- byFactorNames
+#   names(N) <- sub("^x$", "N", names(N))
+#   mean <- aggregate(data[[variable]], data[byFactorNames], FUN=mean)
+#   names(mean)[1:count] <- byFactorNames
+#   names(mean) <- sub("^x$", "mean", names(mean))
+#   sd <- aggregate(data[[variable]], data[byFactorNames], FUN=sd)
+#   names(sd)[1:count] <- byFactorNames
+#   names(sd) <- sub("^x$", "sd", names(sd))
+#   preSummaryStats <- merge(N, mean, by=byFactorNames)
+#   finalSummaryStats <- merge(preSummaryStats, sd, by=byFactorNames)
+#   finalSummaryStats$se <- finalSummaryStats$sd / sqrt(finalSummaryStats$N)
+#   return(finalSummaryStats)
+# }  
 
 ##################################################################################
 ##################################################################################
@@ -116,43 +116,43 @@ Anova(M2c)
 
 #######################
 ###figures
-#abs lnRR
-theme_set(theme_bw(16))
-absLnRRPlot <- 
-  ggplot(removals, aes(x=response_recategorized, y=abs_lrr)) +
-  #geom_violin() +
-  geom_boxplot(width=.5) +
-  xlab('') +
-  ylab('|lnRR|') +
-  # scale_y_continuous(breaks=seq(-4,8,2)) +
-  # coord_cartesian(ylim=c(0,8), xlim=c(1,3)) +
-  scale_x_discrete(labels=c('', '', '')) +
-  annotate('text', x=1.1, y=0.8, label='*', size=10, hjust='left') +
-  annotate('text', x=3.1, y=0.8, label='*', size=10, hjust='left') +
-  annotate('text', x=0.6, y=8, label='(a)', size=5, hjust='left')+
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-  geom_hline(aes(yintercept=0))
-
-#lnRR
-lnRRPlot <- 
-  ggplot(removals, aes(x=response_recategorized, y=lrr)) +
-  #geom_violin() +
-  geom_boxplot(width=0.5) +
-  xlab('') +
-  ylab('lnRR') +
-  # scale_y_continuous(breaks=seq(-4,8,2)) +
-  # coord_cartesian(ylim=c(-4,8), xlim=c(1,3)) +
-  scale_x_discrete(labels=c('Community\n(45)', 'Competition\n(12)', 'Function\n(49)')) +
-  annotate('text', x=0.6, y=8, label='(b)', size=5, hjust='left')+
-  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-  geom_hline(aes(yintercept=0))
-
-
-grid.arrange(absLnRRPlot,lnRRPlot, ncol=1)
-
-pushViewport(viewport(layout=grid.layout(2,1)))
-print(absLnRRPlot, vp=viewport(layout.pos.row = 1, layout.pos.col = 1))
-print(lnRRPlot, vp=viewport(layout.pos.row = 2, layout.pos.col = 1))
+# #abs lnRR
+# theme_set(theme_bw(16))
+# absLnRRPlot <- 
+#   ggplot(removals, aes(x=response_recategorized, y=abs_lrr)) +
+#   #geom_violin() +
+#   geom_boxplot(width=.5) +
+#   xlab('') +
+#   ylab('|lnRR|') +
+#   # scale_y_continuous(breaks=seq(-4,8,2)) +
+#   # coord_cartesian(ylim=c(0,8), xlim=c(1,3)) +
+#   scale_x_discrete(labels=c('', '', '')) +
+#   annotate('text', x=1.1, y=0.8, label='*', size=10, hjust='left') +
+#   annotate('text', x=3.1, y=0.8, label='*', size=10, hjust='left') +
+#   annotate('text', x=0.6, y=8, label='(a)', size=5, hjust='left')+
+#   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+#   geom_hline(aes(yintercept=0))
+# 
+# #lnRR
+# lnRRPlot <- 
+#   ggplot(removals, aes(x=response_recategorized, y=lrr)) +
+#   #geom_violin() +
+#   geom_boxplot(width=0.5) +
+#   xlab('') +
+#   ylab('lnRR') +
+#   # scale_y_continuous(breaks=seq(-4,8,2)) +
+#   # coord_cartesian(ylim=c(-4,8), xlim=c(1,3)) +
+#   scale_x_discrete(labels=c('Community\n(45)', 'Competition\n(12)', 'Function\n(49)')) +
+#   annotate('text', x=0.6, y=8, label='(b)', size=5, hjust='left')+
+#   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+#   geom_hline(aes(yintercept=0))
+# 
+# 
+# grid.arrange(absLnRRPlot,lnRRPlot, ncol=1)
+# 
+# pushViewport(viewport(layout=grid.layout(2,1)))
+# print(absLnRRPlot, vp=viewport(layout.pos.row = 1, layout.pos.col = 1))
+# print(lnRRPlot, vp=viewport(layout.pos.row = 2, layout.pos.col = 1))
 #export at 900x1400
 
 #####doing means +/- 95%CI
@@ -204,6 +204,10 @@ Mean_lnRRPlot <-
 
 grid.newpage()
 v1<-viewport(width = 1, height = 1, x = 0.5, y = 0.5) #plot area for the main map
-v2<-viewport(width = 0.35, height = 0.3, x = 0.8, y = 0.82) #plot area for the inset map
-print(Mean_lnRRPlot,vp=v1) 
+v2<-viewport(width = 0.35, height = 0.3, x = 0.75, y = 0.82) #plot area for the inset map
+print(Mean_lnRRPlot,vp=v1); 
 print(Mean_absLnRRPlot,vp=v2)
+
+
+pdf("figureB3.pdf", width = 5, height=4.5); print(Mean_lnRRPlot,vp=v1); print(Mean_absLnRRPlot,vp=v2);dev.off()
+
